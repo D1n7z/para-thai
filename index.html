@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>para Thai</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Para minha Thai</h1>
+            <p class="hero-subtitle">Um pouco de nós</p>
+        </div>
+        <div class="scroll-down-arrow"></div>
+    </header>
+
+    <section class="galeria-section">
+        <h2 class="galeria-titulo">9 marcos da nossa história</h2>
+        <div class="galeria">
+        <a href="img/galeria/foto1.jpg" data-fancybox="galeria" data-caption="01/03/2025">
+            <img src="img/galeria/foto1.jpg" alt="Foto 1">
+        </a>
+        <a href="img/galeria/foto2.jpg" data-fancybox="galeria" data-caption="18/05/2025">
+            <img src="img/galeria/foto2.jpg" alt="Foto 2">
+        </a>
+        <a href="img/galeria/foto3.jpg" data-fancybox="galeria" data-caption="04/07/2025">
+            <img src="img/galeria/foto3.jpg" alt="Foto 3">
+        </a>
+        <a href="img/galeria/foto4.jpg" data-fancybox="galeria" data-caption="21/07/2025">
+            <img src="img/galeria/foto4.jpg" alt="Foto 4">
+        </a>
+        <a href="img/galeria/foto5.jpg" data-fancybox="galeria" data-caption="27/08/2025">
+            <img src="img/galeria/foto5.jpg" alt="Foto 5">
+        </a>
+        <a href="img/galeria/foto6.jpg" data-fancybox="galeria" data-caption="29/08/2025">
+            <img src="img/galeria/foto6.jpg" alt="Foto 6">
+        </a>
+        <a href="img/galeria/foto7.jpg" data-fancybox="galeria" data-caption="02/09/2025">
+            <img src="img/galeria/foto7.jpg" alt="Foto 7">
+        </a>
+        <a href="img/galeria/foto8.jpg" data-fancybox="galeria" data-caption="06/09/2025">
+            <img src="img/galeria/foto8.jpg" alt="Foto 8">
+        </a>
+        <a href="img/galeria/foto9.jpg" data-fancybox="galeria" data-caption="23/09/2025">
+            <img src="img/galeria/foto9.jpg" alt="Foto 9">
+        </a>
+        </div>
+    </section>
+
+    <section class="playlist-section">
+        <h2 class="playlist-titulo">7 músicas que me lembram você</h2>
+        <div class="playlist-container">
+            <iframe data-testid="embed-iframe" class="spotify-iframe" src="https://open.spotify.com/embed/playlist/70OkBgFC728Evs6sgA6scC?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <h2 class="map-titulo">Lugares especiais da nossa história</h2>
+        <div class="map-places">
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    </section>
+
+    <div class="countdown-container">
+        <h2>A gente se vê de novo em:</h2>
+        <div id="countdown" class="timer">
+            <div><span id="dias">00</span> Dias</div>
+            <div><span id="horas">00</span> Horas</div>
+            <div><span id="minutos">00</span> Minutos</div>
+            <div><span id="segundos">00</span> Segundos</div>
+        </div>
+    </div>
+
+    <div class="action">
+        <section class="action-section">
+    <h2 class="action-title">Por fim</h2>
+    <p class="action-subtitle">Um presente para encurtar nossa distância...</p>
+    
+    <button id="gerarTicketBtn" class="ticket-button">Resgatar Vale-Chamada!</button>
+    <p id="cooldownMsg" class="cooldown-message"></p>
+    
+    <div id="ticketContainer" class="ticket-container" style="display: none;">
+        <div id="ticket" class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-logo">❤️</span>
+                <h3 class="ticket-title">VALE UMA CHAMADA</h3>
+                <span class="ticket-logo">❤️</span>
+            </div>
+            <div class="ticket-body">
+                <p>Este ticket concede a você o direito de me ligar quando quiser matar a saudade.</p>
+                <div class="ticket-details">
+                    <p><strong>Resgatado em:</strong> <span id="ticketDataHora"></span></p>
+                    <p><strong>Nº do Vale:</strong> #<span id="ticketNumero"></span></p>
+                </div>
+            </div>
+            <div class="ticket-footer">
+                <p>Válido para minha bb</p>
+            </div>
+        </div>
+        
+        <button id="exportarTicketBtn" class="export-button">Baixar Ticket</button>
+    </div>
+</section>
+    </div>
+<!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script>
+    // Inicializar Fancybox
+    Fancybox.bind('[data-fancybox="galeria"]', {
+        // Configurações personalizadas
+        Toolbar: {
+            display: {
+                left: ["infobar"],
+                middle: [
+                    "zoomIn",
+                    "zoomOut",
+                    "toggle1to1",
+                    "rotateCCW",
+                    "rotateCW",
+                    "flipX",
+                    "flipY"
+                ],
+                right: ["slideshow", "download", "thumbs", "close"]
+            }
+        },
+        // Fundo escuro
+        backdropClick: "close",
+        dragToClose: false,
+        // Animações
+        showClass: "fancybox-zoomInUp",
+        hideClass: "fancybox-zoomOutDown",
+        // Navegação por teclado
+        keyboard: {
+            Escape: "close",
+            Delete: "close",
+            Backspace: "close",
+            PageUp: "next",
+            PageDown: "prev",
+            ArrowUp: "prev",
+            ArrowDown: "next",
+            ArrowRight: "next",
+            ArrowLeft: "prev"
+        }
+    });
+</script>
+<!-- Leaflet JS deve vir antes do script.js -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- HTML2Canvas para exportar ticket -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
